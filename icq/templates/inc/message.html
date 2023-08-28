@@ -1,0 +1,19 @@
+{% load static %}
+<div class="question">
+    <a class="mes" href="{% url 'dialog' message.sender %}">
+        <span>
+    <div class="row">
+        <div class="col-3">
+            <div class="question-avatar">
+                <img src="{% static 'img/img.png' %}" alt="avatar">
+            </div>
+        </div>
+        <div class="col-9">
+            <h6>{{ message.sender }}</h6>
+            <div class="question-text">{{ message.text }}</div>
+
+        </div>
+    </div>
+        </span>
+    </a>
+</div>

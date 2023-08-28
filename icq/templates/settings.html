@@ -1,0 +1,20 @@
+{% extends "inc/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-1"></div>
+<div class="col-5">
+<div class="login mt-5">
+    <h2>Settings: {{ user.username }}</h2>
+    <form novalidate action="/settings/" method="post">
+                    {% csrf_token %}
+
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+    </form>
+
+</div>
+</div>
+{% endblock content %}

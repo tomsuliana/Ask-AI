@@ -1,0 +1,16 @@
+{% extends "inc/base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="col-3 inmes">
+        {% for person in persons %}
+            {% include "inc/person.html" %}
+        {% endfor %}
+    </div>
+    <div class="col-9">
+
+    </div>
+
+
+{% endblock content %}
+

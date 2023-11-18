@@ -31,12 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'icq_new',
+    'bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -67,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'icq.wsgi.application'
+ASGI_APPLICATION = 'icq.asgi.application'
 
 
 # Database
@@ -77,6 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     }
 }
 
@@ -124,3 +129,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = '/login'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media/'

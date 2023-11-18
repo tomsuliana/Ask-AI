@@ -3,9 +3,11 @@
 {% block content %}
 
             <div class="col-3 inmes">
-            {% for message in messages %}
-                {% include "inc/message.html" %}
-            {% endfor %}
+                {% if user.is_authenticated %}
+                    {% for chat in chats %}
+                        {% include "inc/chat.html" %}
+                    {% endfor %}
+                {% endif %}
             </div>
             <div class="col-9 container chat">
                 <section class="msger">
@@ -18,14 +20,12 @@
 
                       <div class="msg-bubble">
                         <div class="msg-info">
-                          <div class="msg-info-name">{{ name }}</div>
+                          <div class="msg-info-name">Ai</div>
                           <div class="msg-info-time">12:45</div>
                         </div>
 
                         <div class="msg-text">
-
-                          Hello 😄
-
+                          Привет, я чат бот. Поболтай со мной 😄
                         </div>
                       </div>
                     </div>
@@ -34,8 +34,8 @@
                   </main>
 
                   <form id="form" class="msger-inputarea">
-                    <input id="text" type="text" class="msger-input" placeholder="Entrez votre message...">
-                    <button id="sent-button" type="submit" class="msger-send-btn">Envoyer</button>
+                    <input id="text" type="text" class="msger-input" placeholder="Наберите сообщение...">
+                    <button id="sent-button" type="submit" class="msger-send-btn">Отправить</button>
                   </form>
                 </section>
             </div>
@@ -65,9 +65,28 @@
       if (!msgText) return;
 
       appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
+      const socket = new WebSocket('ws://127.0.0.1:8000/ws');
+
+        socket.onopen = function(e) {
+          socket.send(JSON.stringify({
+            message: msgText
+          }));
+        };
+
+        socket.onmessage = function(event) {
+          try {
+            const delay = msgText.split(" ").length * 100;
+
+          setTimeout(() => {
+            appendMessage(BOT_NAME, BOT_IMG, "left", event.data);
+          }, delay);
+          } catch (e) {
+            console.log('Error:', e.message);
+          }
+        };
       msgerInput.value = "";
 
-      botResponse();
+
     });
 
     function appendMessage(name, img, side, text) {

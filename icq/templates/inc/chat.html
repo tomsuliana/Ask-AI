@@ -1,0 +1,29 @@
+{% load static %}
+<div class="question">
+<a class="mes" href="{% url 'dialog' user.username chat.id %}">
+        <span>
+    <div class="row">
+        <div class="col-3">
+            <div class="question-avatar">
+                <img src="{% static 'img/img.png' %}" alt="avatar">
+            </div>
+        </div>
+        <div class="col-9">
+            <h6>{% for member in chat.title %}
+                    {% if member.username != user.username %}
+                        {{ member.username }}
+                    {% endif %}
+                {% endfor %}
+            </h6>
+            {% if chat.last_message_text %}
+                <div class="question-text">{{ chat.last_message_text }}</div>
+            {% else %}
+                <div class="question-text"><p> Сообщений пока нет </p></p></div>
+            {% endif %}
+
+
+        </div>
+    </div>
+        </span>
+    </a>
+</div>

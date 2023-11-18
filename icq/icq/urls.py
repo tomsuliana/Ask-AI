@@ -17,15 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from icq_new import views
+from . import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
-    # path('<name>/', views.index, name="index"),
-    path('dialog/<name>/', views.dialog, name="dialog"),
+    path('start_dialog/', views.start_dialog, name="start_dialog"),
+    path('start_dialog/<member>/', views.start_dialog, name="start_dialog"),
+    path('dialog/<current_username>/<int:chat_id>/', views.dialog, name="dialog"),
     path('login/', views.log_in, name="login"),
     path('signup/', views.signup, name="signup"),
     # path('ask/', views.ask, name="ask"),
     path('settings/', views.settings, name="settings"),
-    # path('logout_view/', views.logout_view, name="logout_view")
+    path('logout_view/', views.logout_view, name="logout_view"),
 ]
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

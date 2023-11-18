@@ -1,0 +1,28 @@
+{% load static %}
+<div class="question">
+<!---->
+
+
+
+
+        <span>
+    <div class="row">
+        <div class="col-3">
+            <div class="question-avatar">
+                <img src="{% static 'img/img.png' %}" alt="avatar">
+            </div>
+        </div>
+        <div class="col-9">
+            <h6>{{ person.username }}</h6>
+             <form id="form" action="/start_dialog/{{ person.username }}/" method="post">
+                 {% csrf_token %}
+                 <button id="sent-button" type="submit" class="msger-send-btn">Начать диалог</button>
+             </form>
+        </div>
+
+
+    </div>
+
+        </span>
+
+</div>

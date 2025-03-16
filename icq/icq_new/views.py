@@ -14,7 +14,7 @@ import json
 
 # Create your views here.
 
-@login_required
+
 def index(request):
     # chats_with_messages = []
     #

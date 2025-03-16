@@ -2,7 +2,7 @@ import subprocess
 
 def get_answer(question):
     executable_name = "/home/uliana/lama/llama.cpp/./main"
-    args = ["-m", "/home/uliana/lama/llama.cpp/models/7B/wizardlm-1.0-uncensored-llama2-13b.Q5_K_M.gguf", "-ins", '--in-prefix', '" "', "--color"]
+    args = ["-m", "/media/uliana/Data/Article/models/llama-2-7b-chat.Q3_K_M.gguf", "-ins", '--in-prefix', '" "', "--color"]
     input_str = question
     process = subprocess.Popen([executable_name] + args,
                                stdout=subprocess.PIPE,

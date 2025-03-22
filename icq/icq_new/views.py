@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.http import QueryDict
 from django.shortcuts import get_object_or_404
 import json
+import os
 
 
 # Create your views here.
@@ -116,8 +117,10 @@ def settings(request):
 
 
 def start_dialog(request, member="None"):
+    models = get_file_names('/media/uliana/Data/Article/models')
     context = {
         'persons': User.objects.all(),
+        'models': models,
     }
 
     if request.method == "POST":
@@ -130,6 +133,21 @@ def start_dialog(request, member="None"):
         chat.save()
         return redirect(reverse('index'))
     return render(request, 'start_dialog.html', context=context)
+
+
+def get_file_names(directory):
+    try:
+        # Получаем список всех объектов в папке
+        items = os.listdir(directory)
+        # Фильтруем список, оставляя только файлы
+        files = [item for item in items if os.path.isfile(os.path.join(directory, item))]
+        return files
+    except FileNotFoundError:
+        print(f"Ошибка: папка '{directory}' не найдена.")
+        return []
+    except PermissionError:
+        print(f"Ошибка: доступ запрещен к папке '{directory}'.")
+        return []
 
 
 

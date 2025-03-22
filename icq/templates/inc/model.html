@@ -1,0 +1,27 @@
+{% load static %}
+<div class="question">
+<!---->
+
+
+
+
+        <span>
+    <div class="row">
+        <div class="col-3">
+            <div class="question-avatar">
+                <img src="{% static 'img/img.png' %}" alt="avatar">
+            </div>
+        </div>
+        <div class="col-9">
+            <h6>{{ model }}</h6>
+
+                 <a href="{% url 'index' %}"><button id="sent-button" type="submit" class="msger-send-btn">Начать диалог</button></a>
+
+        </div>
+
+
+    </div>
+
+        </span>
+
+</div>
